@@ -45,7 +45,7 @@
 						- 유효성 체크
 					3. dbUils.jsp(기존) 
 						- select 작업 조회이후 forwarding
-					4. myinfo.jsp(내용표시)				
+					4. myinfoResult.jsp(내용표시)				
 						- 
 				-->
 				<h1>MYINFO </h1>
