@@ -5,7 +5,7 @@
 <%
  	DBUtils dbUtils = DBUtils.getInstance();
 	
-	List<UserDto> list = dbUtils.selectAlluser();
+	List<UserDto> list = dbUtils.selectAllUser();
     
 %>
 <!DOCTYPE html>
@@ -17,7 +17,7 @@
 <body>
 
 		<!--  
-			1 selectAllUser 를 이용해서 table 의 해당 user 정보 표시
+			1 selectAllUser 를 이용해서 table 의 해당 user정보 표시
 			2 만들어진 테이블에 컬럼을 추가해서 해당 컬럼의 수정	버튼을 만들어보세요 
 			3 만들어진 테이블에 컬럼을 추가해서 해당 컬럼의 삭제	버튼을 만들어보세요 
 			4 수정버튼을 클릭하면 수정페이지로 이동(update.jsp + 해당 사용자 파리미터 전달)
