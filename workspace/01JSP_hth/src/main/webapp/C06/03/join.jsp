@@ -33,7 +33,7 @@
 	
 	// 사용자 상태 정보를 Session에 저장
 	session.setAttribute("isAuth", true);
-	session.setAttribute("role",);
+	session.setAttribute("role","ROLE");
 
 
 %>
