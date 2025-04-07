@@ -1,12 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
-
-</body>
-</html>
+    
+<%@page import="C04.UserDto,C09.DBUtils,java.util.*" %>    
+<%
+	String userid = request.getParameter("userid");
+	System.out.println("USERID : " + userid);
+	int result =  DBUtils.getInstance().deleteUser(userid);
+	
+	//Re + FR
+	response.sendRedirect("./selectAll.jsp");
+%>    

@@ -46,7 +46,8 @@
 						<a href="./update_form.jsp?userid=<%=dto.getUserid()%>">수정하기</a>
 					</td>
 					<td>
-						<a href="./delete.jsp?userid=<%=dto.getUserid()%>">삭제하기</a>
+						<a href="javascript:deleteFunc('<%=dto.getUserid()%>')">삭제하기</a>
+						<button onClick="deleteFunc('<%=dto.getUserid()%>')">삭제버튼</button>
 					</td>
 				</tr>
 			<%		
@@ -58,6 +59,14 @@
 		</table>
 		
 		
+		<script>
+				function deleteFunc(userid){
+					const isDelete = confirm("정말 삭제하시겠습니까?");
+					console.log('userid :' ,userid , "isDelete",isDelete);
+					if(isDelete)
+						location.href=`./delete.jsp?userid=` + userid;
+				}
+		</script>
 		
 
 </body>
