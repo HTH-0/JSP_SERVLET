@@ -82,8 +82,8 @@ footer {
 	 -->
 	<%@page import="DBPKG.*,java.util.*"%>
 	<%
-	DBUtils dbUtils = new DBUtils();
-	List<MemberDto> list = dbUtils.func1();
+		DBUtils dbUtils = new DBUtils();
+		List<MemberDTO> list = dbUtils.func1();
 	%>
 
 
@@ -110,14 +110,16 @@ footer {
 					<th>대표전화</th>
 				</tr>
 				<%
-				for (MemberDto memberDto : list) {
+	
+
+						for (MemberDTO dto : list) {
 				%>
 				<tr>
-					<th><%=memberDto.getM_no()%></th>
-					<th><%=memberDto.getM_name()%></th>
-					<th><%=memberDto.getP_code()%></th>
+					<th><%=dto.getM_no()%></th>
+					<th><%=dto.getM_name()%></th>
+					<th><%=dto.getP_name()%></th>
 					<%
-					String school = memberDto.getP_school();
+					String school = dto.getP_school();
 					switch (school) {
 					case "1":
 						out.print("<td>고졸</td>");
@@ -134,13 +136,13 @@ footer {
 					}
 					%>
 					<%
-					String jumin = memberDto.getM_jumin();
+					String jumin = dto.getM_jumin();
 					String front = jumin.substring(0, 6); 
 					String back = jumin.substring(5); 
 					%>
 					<td><%=front + "-" + back%></td>
-					<th><%=memberDto.getM_city()%></th>
-					<th><%=memberDto.getP_tel1() + "-" + memberDto.getP_tel2() + "-" + memberDto.getP_tel3()%></th>
+					<th><%=dto.getM_city()%></th>
+					<th><%=dto.getP_tel1() + "-" + dto.getP_tel2() + "-" + dto.getP_tel3()%></th>
 
 				</tr>
 				<%

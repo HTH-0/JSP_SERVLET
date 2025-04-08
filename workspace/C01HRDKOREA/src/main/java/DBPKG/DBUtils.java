@@ -21,35 +21,35 @@ public class DBUtils {
         return con;
     }
     
-    public List<MemberDto> func1() throws Exception {
+    public List<MemberDTO> func1() throws Exception {
     	con = getConnection();
 //		select m.m_no, m.m_name, p.p_code, m.p_school, m.m_jumin, m.m_city
 //		from TBL_MEMBER_202005 m
 //    	join tbl_party_202005 p
 //    	on m.p_code = p.p_code;
 	
-    	String sql = "select m.m_no, m.m_name, p.p_code, m.p_school, m.m_jumin, m.m_city, p.p_tel1, p.p_tel2, p.p_tel3"
+    	String sql = "select m.m_no, m.m_name, p.p_name, m.p_school, m.m_jumin, m.m_city, p.p_tel1, p.p_tel2, p.p_tel3"
     			+ " from TBL_MEMBER_202005 m"
     			+ " join tbl_party_202005 p"
     			+ " on m.p_code = p.p_code";
     	
     	pstmt = con.prepareStatement(sql);
     	rs = pstmt.executeQuery();
-    	List<MemberDto> list = new ArrayList<>();
-    	MemberDto memberDto = null;
+    	List<MemberDTO> list = new ArrayList<>();
+    	MemberDTO dto = null;
     	if (rs != null) {
     		while(rs.next()) {
-				memberDto = new MemberDto();
-				memberDto.setM_no(rs.getString(1));
-				memberDto.setM_name(rs.getString(2));
-				memberDto.setP_code(rs.getString(3));
-				memberDto.setP_school(rs.getString(4));
-				memberDto.setM_jumin(rs.getString(5));
-				memberDto.setM_city(rs.getString(6));
-				memberDto.setP_tel1(rs.getString(7));
-				memberDto.setP_tel2(rs.getString(8));
-				memberDto.setP_tel3(rs.getString(9));
-				list.add(memberDto);
+    			dto = new MemberDTO();
+    			dto.setM_no(rs.getString(1));
+    			dto.setM_name(rs.getString(2));
+    			dto.setP_name(rs.getString(3));
+    			dto.setP_school(rs.getString(4));
+    			dto.setM_jumin(rs.getString(5));
+    			dto.setM_city(rs.getString(6));
+    			dto.setP_tel1(rs.getString(7));
+    			dto.setP_tel2(rs.getString(8));
+    			dto.setP_tel3(rs.getString(9));
+				list.add(dto);
 				
 			}	
     	}
@@ -58,6 +58,12 @@ public class DBUtils {
     	return list;
     }
     
-    
+    public List<MemberDTO> func2() throws Exception {
+    	con = getConnection();
+    	
+    	
+    	
+    	return null;
+    }
     
 }

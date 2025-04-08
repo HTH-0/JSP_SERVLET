@@ -1,6 +1,6 @@
 package DBPKG;
 
-public class MemberDto {
+public class MemberDTO {
 	private String m_jumin;
 	private String m_name;
 	private String m_no;
@@ -17,11 +17,11 @@ public class MemberDto {
 	private String p_tel2;
 	private String p_tel3;
 	private String p_tel;
-	public MemberDto() {
+	public MemberDTO() {
 		
 	}
 
-	public MemberDto(String m_jumin, String m_name, String m_no, String v_time, String v_area, String v_confirm,
+	public MemberDTO(String m_jumin, String m_name, String m_no, String v_time, String v_area, String v_confirm,
 			String p_code, String p_name, String p_indate, String p_reader, String p_school, String m_city,
 			String p_tel1, String p_tel2, String p_tel3) {
 		super();
@@ -50,7 +50,7 @@ public class MemberDto {
 		this.p_tel = p_tel;
 	}
 
-	public MemberDto(String v_confirm) {
+	public MemberDTO(String v_confirm) {
 		super();
 		this.v_confirm = v_confirm;
 	}
