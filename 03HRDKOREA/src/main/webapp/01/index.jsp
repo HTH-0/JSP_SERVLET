@@ -69,6 +69,7 @@ a {
 .wrapper>main table th, .wrapper>main table td {
 	min-width: 80px !important;
 	min-height: 25px !important;
+	max-height: 25px !important;
 	border: 1px solid;
 	text-align: center;
 }
@@ -104,7 +105,7 @@ a {
 					<th>수강료</th>
 					<th>강사자격취득일</th>
 				</tr>
-				<%@page import="Utils.*,java.util.*,java.time.*,java.time.format.*" %>		
+				<%@page import="java.text.DecimalFormat,Utils.*,java.util.*,java.time.*,java.time.format.*" %>		
 				<%
 				  List<TeacherDto> list = DBUtils.getInstance().selectAllTeacher();
 				%>
@@ -116,10 +117,14 @@ a {
 					<td><%=dto.getTeacher_code() %></td>
 					<td><%=dto.getTeacher_name() %></td>
 					<td><%=dto.getClass_name() %></td>
+					 
 					<%
-						
+						int price = dto.getClass_price();
+						DecimalFormat fmt = new DecimalFormat("#,###");
 					%>
-					<td><%=dto.getClass_price() %></td>
+	
+					<td><%="\\"+fmt.format(price) %></td>
+					
 					<%
 						String date = dto.getTeacher_regist_date();
 						//INFMT

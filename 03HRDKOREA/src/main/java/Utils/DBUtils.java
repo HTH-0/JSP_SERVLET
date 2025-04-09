@@ -56,6 +56,59 @@ public class DBUtils {
 	}
 
 	
+	public List<MemberDto> selectAllMember() throws Exception{
+		String sql="select * from TBL_MEMBER_202201";
+		pstmt = conn.prepareStatement(sql);
+		
+		rs = pstmt.executeQuery();
+		List<MemberDto> list = new ArrayList();
+		MemberDto dto = null;
+		if(rs!=null) {
+			
+			while(rs.next()) {
+				//코드 추가해주세요 -
+				dto=new MemberDto();
+				dto.setC_no(rs.getString(1));
+				dto.setC_name(rs.getString(2));
+				dto.setPhone(rs.getString(3));
+				dto.setAddress(rs.getString(4));
+				dto.setGrade(rs.getString(5));
+				list.add(dto);
+			}
+			
+		}
+		rs.close();
+		pstmt.close();
+		return list;
+	}
+	
+	public List<ClassDto> selectAllClass() throws Exception{
+		String sql="select * from TBL_CLASS_202201";
+		pstmt = conn.prepareStatement(sql);
+		
+		rs = pstmt.executeQuery();
+		List<ClassDto> list = new ArrayList();
+		ClassDto dto = null;
+		if(rs!=null) {
+			
+			while(rs.next()) {
+				//코드 추가해주세요 -
+				dto=new ClassDto();
+				dto.setRegist_month(rs.getString(1));
+				dto.setC_no(rs.getString(2));
+				dto.setClass_area(rs.getString(3));
+				dto.setTuition(rs.getString(4));
+				dto.setTeacher_code(rs.getString(5));
+				list.add(dto);
+			}
+			
+		}
+		rs.close();
+		pstmt.close();
+		return list;
+	}
+	
+
 }
 
 

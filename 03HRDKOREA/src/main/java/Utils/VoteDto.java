@@ -1,9 +1,9 @@
 package Utils;
 
-
+ 
 
 public class VoteDto {
-
+ 
 	private String v_jumin;
 	private String v_name;
 	private String m_no;
