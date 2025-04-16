@@ -20,15 +20,12 @@
 		</header>
 		<main  class="layout">
 		
-			<h1>USER LOGIN</h1>
-			<form action="${pageContext.request.contextPath}/user/login" method="post">
-				USERNAME : <input name="username" /><br/>
-				PASSWORD : <input name="password" /><br/>
-				<button>로그인</button>
+			<h1>USER LOGOUT</h1>
+			<form action="${pageContext.request.contextPath}/user/logout" method="post">
+				<button type="submit">로그아웃</button>
 			</form>
 			<div>
 				${username_err}
-				${message}
 			</div>
 		</main>
 		

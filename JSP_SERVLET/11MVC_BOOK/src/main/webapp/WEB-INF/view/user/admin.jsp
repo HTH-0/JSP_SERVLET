@@ -19,17 +19,8 @@
 			<%@include file="/resources/layouts/nav.jsp" %>
 		</header>
 		<main  class="layout">
-		
-			<h1>USER LOGIN</h1>
-			<form action="${pageContext.request.contextPath}/user/login" method="post">
-				USERNAME : <input name="username" /><br/>
-				PASSWORD : <input name="password" /><br/>
-				<button>로그인</button>
-			</form>
-			<div>
-				${username_err}
-				${message}
-			</div>
+			<h1>ADMIN</h1>
+	
 		</main>
 		
 		

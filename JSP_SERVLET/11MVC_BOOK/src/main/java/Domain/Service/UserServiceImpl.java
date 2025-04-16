@@ -53,7 +53,7 @@ public class UserServiceImpl {
 		boolean isLogin = false;
 		try {
 			
-			connectionPool.beginTransaction();	
+			//connectionPool.beginTransaction();	
 			
 			UserDto userDb  = userDao.select(userDto.getUsername());	//sql 질의 다수		
 			
@@ -77,9 +77,9 @@ public class UserServiceImpl {
 					response.put("message", "로그인 성공!");
 				}
 			}
-			connectionPool.commitTransaction();
+			//connectionPool.commitTransaction();
 		}catch(SQLException e) {
-			connectionPool.rollbackTransaction();
+			//connectionPool.rollbackTransaction();
 		}
 		return response;
 	}
