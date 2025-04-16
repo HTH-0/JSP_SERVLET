@@ -40,7 +40,7 @@ public class BookCreateController implements SubController {
 			BookDto bookDto = new BookDto(username, password, role);
 			boolean isOk = isValid(bookDto);
 			if (!isOk) {
-				req.getRequestDispatcher("/WEB-INF/view/user/create.jsp").forward(req, resp);
+				req.getRequestDispatcher("/WEB-INF/view/book/create.jsp").forward(req, resp);
 				return;
 			}
 
