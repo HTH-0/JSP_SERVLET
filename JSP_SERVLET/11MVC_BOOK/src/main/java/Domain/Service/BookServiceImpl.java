@@ -24,7 +24,11 @@ public class BookServiceImpl {
 	//TX 처리 + 비즈니스 유효성검사
 	public boolean bookRegistration(BookDto bookDto) throws Exception{
 		
-		return bookDao.insert(bookDto)>0;
+		
+		int result = bookDao.insert(bookDto);
+		
+		
+		return r;
 		
 	}
 	

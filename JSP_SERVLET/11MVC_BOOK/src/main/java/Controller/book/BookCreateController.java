@@ -5,85 +5,87 @@ import javax.servlet.http.HttpServletResponse;
 
 import Controller.SubController;
 import Domain.Dto.BookDto;
-import Domain.Dto.UserDto;
-import Domain.Service.BookServiceImpl;
 
-public class BookCreateController implements SubController {
-
+public class BookCreateController implements SubController{
 	private HttpServletRequest req;
 	private HttpServletResponse resp;
+	
 
-	private BookServiceImpl userService;
+	public BookCreateController() throws Exception{
 
-	public BookCreateController() throws Exception {
-		bookService = BookServiceImpl.getInstance();
 	}
-
 	@Override
 	public void execute(HttpServletRequest req, HttpServletResponse resp) {
 		this.req = req;
 		this.resp = resp;
 		System.out.println("[SC] BookCreateController execute..");
+		
 
 		try {
 			String uri = req.getMethod();
-			if (uri.equals("GET")) {
+			
+			if(uri.equals("GET")) {
 				req.getRequestDispatcher("/WEB-INF/view/book/create.jsp").forward(req, resp);
-				return;
+				return ;
 			}
-
-			// 파라미터(username,password)
-			String username = req.getParameter("username");
-			String password = req.getParameter("password");
-			String role = "ROLE_USER";
-			// 입력값검증
-			BookDto bookDto = new BookDto(username, password, role);
-			boolean isOk = isValid(bookDto);
-			if (!isOk) {
-				req.getRequestDispatcher("/WEB-INF/view/book/create.jsp").forward(req, resp);
-				return;
+			
+			String bookCode = req.getParameter("bookCode");
+			String bookName = req.getParameter("bookName");
+			String publisher = req.getParameter("publisher");
+			String isbn = req.getParameter("isbn");
+			
+			BookDto bookDto = new BookDto(bookCode, bookName, publisher, isbn);
+			
+			if(!isValid (bookDto)) {
+				req.getRequestDispatcher("WEB-INF/view/book/error.jsp").forward(req,resp);	
+			
 			}
-
-			// 서비스
-			boolean isJoin = userService.userJoin(userDto);
-
-			// 뷰
-			if (isJoin) {
-				resp.sendRedirect(req.getContextPath() + "/index.do");
-			} else {
-				req.getRequestDispatcher("/WEB-INF/view/user/join.jsp").forward(req, resp);
-			}
-
-		} catch (Exception e) {
+			
+			
+			
+		}catch(Exception e) {
 			exceptionHandler(e);
 			try {
-				req.getRequestDispatcher("/WEB-INF/view/user/error.jsp").forward(req, resp);
-			} catch (Exception e2) {
-			}
+				req.getRequestDispatcher("/WEB-INF/view/book/error.jsp").forward(req, resp);
+			}catch(Exception e2) {}
 		}
 
 	}
 
-	private boolean isValid(UserDto userDto) {
-		if (userDto.getUsername() == null || userDto.getUsername().length() <= 4) {
-			req.setAttribute("username_err", "userid의 길이는 최소 5자이상이어야합니다");
-			System.out.println("[INVALID] userid의 길이는 최소 5자이상이어야합니다");
-			return false;
-		}
-		if (userDto.getUsername().matches("^[0-9].*")) {
-			System.out.println("[INVALID] userid의 첫문자로 숫자가 들어올수 없습니다");
-			req.setAttribute("username_err", "userid의 userid의 첫문자로 숫자가 들어올수 없습니다");
-			return false;
-		}
+	private boolean isValid(BookDto bookDto) {
 
+		if(bookDto.getBookCode() == null) {
+			req.setAttribute("bookCode", "bookCode 입력하세요");
+			return false;
+		}
+		if(bookDto.getBookName() == null) {
+			req.setAttribute("bookName", "bookName 입력하세요");
+			return false;
+		}
+		if(bookDto.getPublisher() == null) {
+			req.setAttribute("publisher", "Publisher 입력하세요");
+			return false;
+		}
+		if(bookDto.getIsbn() == null) {
+			req.setAttribute("isbn", "isbn 입력하세요");
+			return false;
+		}
+		
+		if(
+			bookDto.getBookCode() == null ||
+			bookDto.getBookName() == null ||
+			bookDto.getPublisher() == null ||
+			bookDto.getIsbn() == null 
+		) {
+			return false;
+		}
+		
 		return true;
 	}
-
 	// 예외처리함수
 	public void exceptionHandler(Exception e) {
 		req.setAttribute("status", false);
 		req.setAttribute("message", e.getMessage());
 		req.setAttribute("exception", e);
 	}
-
 }
