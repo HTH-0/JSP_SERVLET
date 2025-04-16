@@ -83,8 +83,7 @@ public class BookDaoImpl implements BookDao {
 	//단건조회
  
 	@Override
-	public UserDto select(UserDto userDto) throws SQLException{
-		
+	public UserDto select(UserDto userDto) throws SQLException{	
 		return null;
 	}
 	//다건조회
@@ -98,11 +97,12 @@ public class BookDaoImpl implements BookDao {
 			connectionItem = connectionPool.getConnection();
 			Connection conn = connectionItem.getConn();
 			
-			pstmt = conn.prepareStatement("SELECT * FROM tbl_book");
+			pstmt = conn.prepareStatement("select * from tbl_book");
 			
-			rs= pstmt.executeQuery();
-			if(rs != null) {
-				while (rs.next()) {
+			rs=pstmt.executeQuery();
+			if(rs!=null) {
+				
+				while(rs.next()) {
 					dto = new BookDto();
 					dto.setBookCode(rs.getString(1));
 					dto.setBookName(rs.getString(2));
@@ -110,20 +110,59 @@ public class BookDaoImpl implements BookDao {
 					dto.setIsbn(rs.getString(4));
 					
 					list.add(dto);
-					
 				}
 			}
+	
 			return list;
-			
-			
+
+				
 		}catch(SQLException e) {
 			e.printStackTrace();
-			throw new SQLException("BOOKDAO's INSERT SQL EXCEPTION!!");
+			throw new SQLException("BOOKDAO's SELECT SQL EXCEPTION!!");
 		}finally {
 			try {pstmt.close();}catch(Exception e2) {}
-			connectionPool.releaseConnection(connectionItem);
+			//connection release
+			connectionPool.releaseConnection(connectionItem);	
+		}
+	}
+	@Override
+	public List<BookDto> selectAll(int offset, int amount) throws Exception{
+		List<BookDto> list = new LinkedList();
+		BookDto dto = null;
+		try {
+			//connection  get
+			connectionItem = connectionPool.getConnection();
+			Connection conn = connectionItem.getConn();
+			
+			pstmt = conn.prepareStatement("select * from tbl_book");
+			
+			rs=pstmt.executeQuery();
+			if(rs!=null) {
+				
+				while(rs.next()) {
+					dto = new BookDto();
+					dto.setBookCode(rs.getString(1));
+					dto.setBookName(rs.getString(2));
+					dto.setPublisher(rs.getString(3));
+					dto.setIsbn(rs.getString(4));
+					
+					list.add(dto);
+				}
+			}
+	
+			return list;
+
+				
+		}catch(SQLException e) {
+			e.printStackTrace();
+			throw new SQLException("BOOKDAO's SELECT SQL EXCEPTION!!");
+		}finally {
+			try {pstmt.close();}catch(Exception e2) {}
+			//connection release
+			connectionPool.releaseConnection(connectionItem);	
 		}
 	}	
+	
 
 }
 

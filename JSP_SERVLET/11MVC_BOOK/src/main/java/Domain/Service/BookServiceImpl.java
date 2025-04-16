@@ -7,6 +7,7 @@ import java.util.Map;
 import Domain.Dao.BookDao;
 import Domain.Dao.BookDaoImpl;
 import Domain.Dto.BookDto;
+import Domain.Dto.Criteria;
 
 public class BookServiceImpl {
 
@@ -25,28 +26,43 @@ public class BookServiceImpl {
 	}
 	
 	
-	//TX 처리 + 비즈니스 유효성검사
+	//TX 처리 + 비즈니스 유효성검사(도서추가 -)
 	public boolean bookRegistration(BookDto bookDto) throws Exception{
-		
 		
 		int result = bookDao.insert(bookDto);
 		
-		
-		return bookDao.insert(bookDto)>0;
+		return result>0;
 		
 	}
-	public Map<String,Object> getAllBooks() throws Exception{
-		Map<String, Object> response = new LinkedHashMap<>();
+	
+	public Map<String,Object> getAllBooks() throws Exception {
+		Map<String,Object> response = new LinkedHashMap();
 		
-		List<BookDto> list = bookDao.selectAll();
-		if(list.size() != 0) {
+		List<BookDto> list =  bookDao.selectAll();
+		if(list.size()>0) {
 			response.put("status", true);
 			response.put("list", list);
 		}else {
 			response.put("status", false);
 		}
-		
+
 		return response;
 	}
- 	
+	
+	public Map<String,Object> getAllBooks(Criteria criteria) throws Exception {
+		Map<String,Object> response = new LinkedHashMap();
+		
+		int offset = (criteria.getPageno() - 1 ) * criteria.getAmount();
+		List<BookDto> list =  bookDao.selectAll(offset, criteria.getAmount());
+		if(list.size()>0) {
+			response.put("status", true);
+			response.put("list", list);
+		}else {
+			response.put("status", false);
+		}
+
+		return response;
+	}
+	
+	
 }

@@ -20,26 +20,27 @@
 		</header>
 		<main  class="layout">
 			<h1>/BOOK/CREATE</h1>
-			<form action="${pageContext.request.contextPath}/book/create" method="post"></form>
+			<form action="${pageContext.request.contextPath}/book/create" method="post">
 				<div>
-					<label for="">bookCode</label> <span>${bookCode}</span> <br />
-					<input type="text" name="bookCode" placeholder="bookCode"/>
+					<label for="">bookCode : </label><span>${bookCode}</span><br/>
+					<input type="text" name="bookCode"  placeHolder="bookCode" />
 				</div>
 				<div>
-					<label for="">bookName</label> <span>${bookName}</span> <br />
-					<input type="text" name="bookName" placeholder="bookName"/>
+					<label for="">bookName : </label><span>${bookName}</span><br/>
+					<input type="text" name="bookName"  placeHolder="bookName" />
 				</div>
 				<div>
-					<label for="">publisher</label> <span>${publisher}</span> <br />
-					<input type="text" name="publisher" placeholder="publisher"/>
+					<label for="">publisher : </label><span>${publisher}</span><br/>
+					<input type="text" name="publisher"  placeHolder="publisher" />
 				</div>
 				<div>
-					<label for="">isbn</label> <span>${isbn}</span> <br />
-					<input type="text" name="isbn" placeholder="isbn"/>
+					<label for="">isbn : </label><span>${isbn}</span><br/>
+					<input type="text" name="isbn" placeHolder="isbn" />
 				</div>
 				<div>
-					<button>도서 등록</button>
+					<button>도서등록</button>
 				</div>
+			</form>
 		</main>
 		
 		

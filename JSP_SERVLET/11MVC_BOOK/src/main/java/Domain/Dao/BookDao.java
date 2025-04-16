@@ -17,7 +17,8 @@ public interface BookDao {
 
 	UserDto select(UserDto userDto) throws SQLException;
 	//다건조회
+	public List<BookDto> selectAll() throws Exception;
 
-	List<BookDto> selectAll() throws Exception;
+	public List<BookDto> selectAll(int offset, int amount) throws Exception;
 
 }
