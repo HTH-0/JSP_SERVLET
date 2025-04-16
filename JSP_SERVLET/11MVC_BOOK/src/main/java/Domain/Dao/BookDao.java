@@ -15,9 +15,9 @@ public interface BookDao {
 	int delete(UserDto userDto) throws SQLException;
 	//단건조회
 
-	UserDto select(UserDto userDto);
+	UserDto select(UserDto userDto) throws SQLException;
 	//다건조회
 
-	List<UserDto> selectAll();
+	List<BookDto> selectAll() throws Exception;
 
 }

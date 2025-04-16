@@ -27,8 +27,16 @@ class DaoTests {
 		System.out.println(userDao.select("bbbbbb"));
 	}
 	@Test
+	@Disabled
 	void test3() throws Exception {
 		BookDao dao = BookDaoImpl.getInstance();
 		dao.insert(new BookDto("1111","C++","한빛미디어","111-111"));
 	}
+	@Test
+	@Disabled
+	void test4() throws Exception{
+		BookDao dao = BookDaoImpl.getInstance();
+		dao.selectAll().forEach(System.out::println);
+	}
+	
 }

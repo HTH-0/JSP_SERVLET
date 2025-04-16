@@ -1,18 +1,23 @@
 package Controller.book;
 
+import java.util.List;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import Controller.SubController;
 import Domain.Dto.BookDto;
+import Domain.Service.BookServiceImpl;
 
 public class BookListController implements SubController{
 	private HttpServletRequest req;
 	private HttpServletResponse resp;
 	
+	private BookServiceImpl bookService;
 
 	public BookListController() throws Exception{
-
+		this.bookService = BookService.getInstance();
 	}
 	@Override
 	public void execute(HttpServletRequest req, HttpServletResponse resp) {
@@ -28,7 +33,18 @@ public class BookListController implements SubController{
 				req.getRequestDispatcher("/WEB-INF/view/book/list.jsp").forward(req, resp);
 				return ;
 			}
-	
+			
+			
+			Map<String, Object> serviceResponse = bookService.getAllBooks();
+			Boolean status = (Boolean)serviceResponse.get("status");
+			if(status) {
+				List<BookDto> list = (List<BookDto>)serviceResponse.get("list");
+				req.setAttribute("list", serviceResponse);
+			}else {
+				
+			}
+			req.getRequestDispatcher("/WEB-INF/view/book/list.jsp").forward(req, resp);
+			
 		}catch(Exception e) {
 			exceptionHandler(e);
 			try {

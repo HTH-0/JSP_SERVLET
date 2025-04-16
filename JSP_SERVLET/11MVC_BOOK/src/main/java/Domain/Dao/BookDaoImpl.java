@@ -1,10 +1,10 @@
 package Domain.Dao;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.LinkedList;
 import java.util.List;
 
 import Domain.Dao.ConnectionPool.ConnectionItem;
@@ -83,14 +83,46 @@ public class BookDaoImpl implements BookDao {
 	//단건조회
  
 	@Override
-	public UserDto select(UserDto userDto) {	
+	public UserDto select(UserDto userDto) throws SQLException{
+		
 		return null;
 	}
 	//다건조회
  
 	@Override
-	public List<UserDto> selectAll() {	
-		return null;
+	public List<BookDto> selectAll() throws Exception{
+		List<BookDto> list = new LinkedList();
+		BookDto dto = null;
+		try {
+			//connection  get
+			connectionItem = connectionPool.getConnection();
+			Connection conn = connectionItem.getConn();
+			
+			pstmt = conn.prepareStatement("SELECT * FROM tbl_book");
+			
+			rs= pstmt.executeQuery();
+			if(rs != null) {
+				while (rs.next()) {
+					dto = new BookDto();
+					dto.setBookCode(rs.getString(1));
+					dto.setBookName(rs.getString(2));
+					dto.setPublisher(rs.getString(3));
+					dto.setIsbn(rs.getString(4));
+					
+					list.add(dto);
+					
+				}
+			}
+			return list;
+			
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+			throw new SQLException("BOOKDAO's INSERT SQL EXCEPTION!!");
+		}finally {
+			try {pstmt.close();}catch(Exception e2) {}
+			connectionPool.releaseConnection(connectionItem);
+		}
 	}	
 
 }

@@ -5,12 +5,14 @@ import javax.servlet.http.HttpServletResponse;
 
 import Controller.SubController;
 import Domain.Dto.BookDto;
+import Domain.Service.BookServiceImpl;
 
 public class BookCreateController implements SubController{
 	private HttpServletRequest req;
 	private HttpServletResponse resp;
 	
-
+	private BookServiceImpl bookService;
+	
 	public BookCreateController() throws Exception{
 
 	}
@@ -41,6 +43,11 @@ public class BookCreateController implements SubController{
 			
 			}
 			
+			boolean isadded = bookService.bookRegistration(bookDto);
+			
+			if(isadded) {
+				resp.sendRedirect(req.getContextPath() + "/book/list");
+			}
 			
 			
 		}catch(Exception e) {

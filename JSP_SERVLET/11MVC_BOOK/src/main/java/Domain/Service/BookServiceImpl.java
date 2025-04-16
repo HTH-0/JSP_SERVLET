@@ -1,5 +1,9 @@
 package Domain.Service;
 
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+
 import Domain.Dao.BookDao;
 import Domain.Dao.BookDaoImpl;
 import Domain.Dto.BookDto;
@@ -28,9 +32,21 @@ public class BookServiceImpl {
 		int result = bookDao.insert(bookDto);
 		
 		
-		return r;
+		return bookDao.insert(bookDto)>0;
 		
 	}
-	
-	
+	public Map<String,Object> getAllBooks() throws Exception{
+		Map<String, Object> response = new LinkedHashMap<>();
+		
+		List<BookDto> list = bookDao.selectAll();
+		if(list.size() != 0) {
+			response.put("status", true);
+			response.put("list", list);
+		}else {
+			response.put("status", false);
+		}
+		
+		return response;
+	}
+ 	
 }
