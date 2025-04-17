@@ -1,12 +1,25 @@
 package Listener;
 
-import javax.servlet.ServletContextAttributeEvent;
-import javax.servlet.ServletContextAttributeListener;
+import javax.servlet.ServletContextEvent;
+import javax.servlet.ServletContextListener;
+import javax.servlet.annotation.WebListener;
 
-public class C01ServletContextListener implements ServletContextAttributeListener{
+//@WebListener
+public class C01ServletContextListener implements ServletContextListener{
 
 	@Override
-	public void attributeAdded(ServletContextAttributeEvent event) {
+	public void contextInitialized(ServletContextEvent sce) {
+		//----
+		System.out.println("[LISTENER] C01ServletContextListener..start...");
 	}
+	
+	@Override
+	public void contextDestroyed(ServletContextEvent sce) {
+		System.out.println("[LISTENER] C01ServletContextListener..end...");
+	}
+
+
+
+	
 	
 }
