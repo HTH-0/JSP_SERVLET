@@ -8,6 +8,7 @@ import Domain.Dao.BookDao;
 import Domain.Dao.BookDaoImpl;
 import Domain.Dto.BookDto;
 import Domain.Dto.Criteria;
+import Domain.Dto.PageDto;
 
 public class BookServiceImpl {
 
@@ -49,19 +50,47 @@ public class BookServiceImpl {
 		return response;
 	}
 	
-	public Map<String,Object> getAllBooks(Criteria criteria) throws Exception {
+	public Map<String, Object> getAllBooks(Criteria criteria) throws Exception{
 		Map<String,Object> response = new LinkedHashMap();
 		
-		int offset = (criteria.getPageno() - 1 ) * criteria.getAmount();
-		List<BookDto> list =  bookDao.selectAll(offset, criteria.getAmount());
+		int offset = (criteria.getPageno()-1) * criteria.getAmount();	
+		
+		//페이지별 건수 
+		List<BookDto> list =  bookDao.selectAll(offset,criteria.getAmount());
+		
+		//PageDto
+		long totalCount = bookDao.count();
+		PageDto pageDto = new PageDto(totalCount,criteria);
+		System.out.println("Service pageDto : " + pageDto);
+		
 		if(list.size()>0) {
 			response.put("status", true);
 			response.put("list", list);
+			response.put("pageDto", pageDto);
 		}else {
 			response.put("status", false);
 		}
 
 		return response;
+	}
+	public Map<String, Object> getBook(String bookCode) throws Exception{
+		
+		Map<String, Object> response = new LinkedHashMap();
+		
+		BookDto bookDto =  bookDao.select(bookCode);
+		
+		if(bookDto == null)
+			response.put("status", false);
+		else {
+			response.put("status", true);
+			response.put("bookDto", bookDto);
+		}
+		
+		return response;
+	}
+	public Map<String, Object> modifyBook(BookDto bookDto) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 	

@@ -25,7 +25,6 @@ public class BookCreateController implements SubController{
 		System.out.println("[SC] BookCreateController execute..");
 		
 		try {
-			
 			String uri = req.getMethod();
 			
 			if(uri.equals("GET")) {

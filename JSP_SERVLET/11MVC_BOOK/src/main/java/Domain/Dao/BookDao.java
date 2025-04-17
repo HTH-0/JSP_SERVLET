@@ -20,5 +20,8 @@ public interface BookDao {
 	public List<BookDto> selectAll() throws Exception;
 
 	public List<BookDto> selectAll(int offset, int amount) throws Exception;
+	
+	public long count() throws Exception;
 
+	BookDto select(String bookCode) throws Exception;
 }
